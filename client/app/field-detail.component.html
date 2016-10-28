@@ -1,0 +1,58 @@
+<div *ngIf="field">
+  <h2 *ngIf="field._id!=''">Edit Field</h2>
+  <h2 *ngIf="field._id==''">Add Field</h2>
+  <form>
+    <div class="form-group">
+      <label class="form-check-inline">Location
+        <select class="form-control" name="locationID" [(ngModel)]="field.locationID">
+          <option *ngFor="let locationObject of locationObjects" [value]="locationObject._id">{{locationObject.name}}</option>
+        </select> 
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="form-check-inline">Day(s) of the Week
+        <br />
+        <label class="form-check-inline">
+          <input name="monday" class="form-check-input" type="checkbox" [(ngModel)]="monday"> Monday
+        </label>
+        <label class="form-check-inline">
+          <input #tuesdaycb name="tuesday" class="form-check-input" type="checkbox" [(ngModel)]="tuesday" (change)=changeDay(tuesdaycb)> Tuesday
+        </label>
+        <label class="form-check-inline">
+          <input #wednesdaycb name="wednesday" class="form-check-input" type="checkbox" [(ngModel)]="wednesday" (change)=changeDay(wednesdaycb)> Wednesday
+        </label>
+        <label class="form-check-inline">
+          <input #thursdaycb name="thursday" class="form-check-input" type="checkbox" [(ngModel)]="thursday" (change)=changeDay(thursdaycb)> Thursday
+        </label>
+        <label class="form-check-inline">
+          <input #fridaycb name="friday" class="form-check-input" type="checkbox" [(ngModel)]="friday" (change)=changeDay(fridaycb)> Friday
+        </label>
+        <label class="form-check-inline">
+          <input #saterdaycb name="saturday" class="form-check-input" type="checkbox" [(ngModel)]="saturday" (change)=changeDay(saterdaycb)> Saterday
+        </label>
+        <label class="form-check-inline">
+          <input #sundaycb name="sunday" class="form-check-input" type="checkbox" [(ngModel)]="sunday" (change)=changeDay(sundaycb)> Sunday
+        </label>
+      </label>
+    </div>  
+    <div class="form-group">
+      <label class="form-check-inline">Start Time
+        <input type="time" class="form-control" name="startTime" [(ngModel)]="field.startTime">
+      </label>
+      <label class="form-check-inline">End Time
+        <input type="time" class="form-control" name="endTime" [(ngModel)]="field.endTime">
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="form-check-inline">Number of Fields
+        <input type="number" min="1" step="1" class="form-control" name="fieldNr" [(ngModel)]="field.fieldNr">
+      </label>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-secondary" (click)="goBack()">Back</button>
+      <button class="btn btn-primary" *ngIf="field._id!=''" (click)="update()">Edit</button>
+      <button class="btn btn-primary" *ngIf="field._id==''" (click)="create()">Add</button>
+      <button class="btn btn-danger" *ngIf="field._id!=''" (click)="delete()">Delete</button>
+    </div>
+  </form>
+</div>

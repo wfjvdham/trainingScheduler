@@ -1,0 +1,33 @@
+<h3>Current Schedule</h3>
+<button type="button" class="btn btn-primary btn-lg" (click)="gotoLocationDetail()">Add Location</button>
+<button type="button" class="btn btn-primary btn-lg" (click)="gotoFieldDetail()">Add Field</button>
+<button type="button" class="btn btn-primary btn-lg" (click)="gotoTeamDetail()">Add Team</button>
+<button type="button" class="btn btn-primary btn-lg" (click)="gotoTrainerDetail()">Add Trainer</button>
+<button type="button" class="btn btn-primary btn-lg" (click)="updateSchedule()">Update Schedule</button>
+<div *ngIf="status == 'loading'">loading</div>
+<div *ngIf="status == 'ready'">ready</div>
+<button type="button" class="btn btn-primary btn-lg" (click)="log()">Log</button>
+<table class="table table-striped" *ngIf="locationObjects && teams">
+  <thead>
+    <tr>
+      <th>Location</th>
+      <th>Day(s) of the Week</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Field Number</th>
+      <th>Team</th>
+      <th>Trainer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let solution of solutions">
+      <td>{{getLocationName(solution.location)}}</td>
+      <td>{{getDays(solution.dayOfWeek)}}</td>
+      <td>{{getTime(solution.startTime)}}</td>
+      <td>{{getTime(solution.endTime)}}</td>
+      <td>{{solution.field}}</td>
+      <td>{{getTeamName(solution.asignedTo)}}</td>
+      <td>{{getTrainer(solution.asignedTo)}}</td>
+    </tr>
+  </tbody>
+</table>

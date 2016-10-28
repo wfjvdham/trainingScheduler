@@ -1,0 +1,23 @@
+<table class="table table-striped" *ngIf="locationObjects">
+  <thead>
+    <tr>
+      <th>Location</th>
+      <th>Day(s) of the Week</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Number of Fields</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let field of fields">
+      <td>{{getLocationName(field.locationID)}}</td>
+      <td>{{getDays(field.dayOfTheWeek)}}</td>
+      <td>{{field.startTime}}</td>
+      <td>{{field.endTime}}</td>
+      <td>{{field.fieldNr}}</td>
+      <td><button type="button" class="btn btn-secondary" (click)="gotoDetail(field)">Edit</button></td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary btn-lg" (click)="gotoDetail()">Add Field</button>

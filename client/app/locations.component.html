@@ -1,0 +1,15 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let locationObject of locationObjects">
+      <td>{{locationObject.name}}</td>
+      <td><button type="button" class="btn btn-secondary" (click)="gotoDetail(locationObject)">Edit</button></td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary btn-lg" (click)="gotoDetail()">Add Location</button>

@@ -1,0 +1,17 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Number of Trainings</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let team of teams">
+      <td>{{team.name}}</td>
+      <td>{{team.nrOfTrainings}}</td>
+      <td><button type="button" class="btn btn-secondary" (click)="gotoDetail(team)">Edit</button></td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary btn-lg" (click)="gotoDetail()">Add Team</button>

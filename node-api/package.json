@@ -1,0 +1,16 @@
+{
+  "name": "node-api",
+  "main": "server.js",
+  "scripts": {
+	"start": "node server.js"
+  },
+  "author": "Chris Sevilleja <scotch.io>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "~4.0.0",
+    "morgan": "~1.0.0",
+    "mongoose": "4.6.4",
+    "body-parser": "~1.0.1",
+    "async": "2.1.2"
+  }
+}

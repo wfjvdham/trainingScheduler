@@ -1,0 +1,19 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Trains Team</th>
+      <th>Plays in Team</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody *ngIf="teams">
+    <tr *ngFor="let trainer of trainers">
+      <td>{{trainer.name}}</td>
+      <td>{{getTeamName(trainer.trains)}}</td>
+      <td>{{getTeamName(trainer.inTeam)}}</td>
+      <td><button type="button" class="btn btn-secondary" (click)="gotoDetail(trainer)">Edit</button></td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary btn-lg" (click)="gotoDetail()">Add Trainer</button>
