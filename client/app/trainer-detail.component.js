@@ -20,6 +20,11 @@ var TrainerDetailComponent = (function () {
         this.teamService = teamService;
         this.route = route;
         this.location = location;
+        this.monday = true;
+        this.tuesday = true;
+        this.wednesday = true;
+        this.thursday = true;
+        this.friday = true;
     }
     TrainerDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -27,19 +32,67 @@ var TrainerDetailComponent = (function () {
             var id = params['id'];
             if (id != "") {
                 _this.trainerService.getTrainer(id)
-                    .then(function (trainer) { return _this.trainer = trainer; });
+                    .then(function (trainer) { return _this.trainer = trainer; })
+                    .then(function (trainer) { return _this.initDayValues(trainer); });
             }
             else {
-                _this.trainer = new trainer_1.Trainer("", "", "", "");
+                _this.trainer = new trainer_1.Trainer("", "", "", "", "-1");
             }
         });
         this.teamService.getTeams().then(function (teams) { return _this.teams = teams; });
     };
+    TrainerDetailComponent.prototype.initDayValues = function (trainer) {
+        var array = JSON.parse("[" + trainer.dayOfTheWeek + "]");
+        this.monday = false;
+        this.tuesday = false;
+        this.wednesday = false;
+        this.thursday = false;
+        this.friday = false;
+        for (var i = 0; i < array.length; i++) {
+            var day = array[i];
+            if (day == 1) {
+                this.monday = true;
+            }
+            if (day == 2) {
+                this.tuesday = true;
+            }
+            if (day == 3) {
+                this.wednesday = true;
+            }
+            if (day == 4) {
+                this.thursday = true;
+            }
+            if (day == 5) {
+                this.friday = true;
+            }
+        }
+    };
+    TrainerDetailComponent.prototype.createDayArray = function () {
+        var dayArray = [];
+        if (this.monday) {
+            dayArray.push(1);
+        }
+        if (this.tuesday) {
+            dayArray.push(2);
+        }
+        if (this.wednesday) {
+            dayArray.push(3);
+        }
+        if (this.thursday) {
+            dayArray.push(4);
+        }
+        if (this.friday) {
+            dayArray.push(5);
+        }
+        return dayArray;
+    };
     TrainerDetailComponent.prototype.update = function () {
+        this.trainer.dayOfTheWeek = this.createDayArray().toString();
         this.trainerService.update(this.trainer)
             .then(this.goBack);
     };
     TrainerDetailComponent.prototype.create = function () {
+        this.trainer.dayOfTheWeek = this.createDayArray().toString();
         this.trainerService.create(this.trainer)
             .then(this.goBack);
     };
@@ -53,6 +106,24 @@ var TrainerDetailComponent = (function () {
     TrainerDetailComponent.prototype.goToLocations = function () {
         //this.location.go('/locations');
         //this.router.navigate(['/locations']);
+    };
+    TrainerDetailComponent.prototype.changeDay = function (element) {
+        switch (element.name) {
+            case "monday":
+                this.monday = element.checked;
+                break;
+            case "tuesday":
+                this.tuesday = element.checked;
+                break;
+            case "wednesday":
+                this.wednesday = element.checked;
+                break;
+            case "thursday":
+                this.thursday = element.checked;
+                break;
+            default:
+                this.friday = element.checked;
+        }
     };
     TrainerDetailComponent = __decorate([
         core_1.Component({

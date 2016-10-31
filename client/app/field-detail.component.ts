@@ -15,7 +15,7 @@ export class FieldDetailComponent implements OnInit {
   //TODO add validation
   field: Field;
   locationObjects: LocationObject[];
-  monday: Boolean = false;
+  monday: Boolean = false; 
   tuesday: Boolean = false;
   wednesday: Boolean = false;
   thursday: Boolean = false;

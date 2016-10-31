@@ -5,6 +5,7 @@ var TrainerSchema   = new Schema({
 	name: String,
 	trains: String,
 	inTeam: String,
+	dayOfTheWeek: {type: Array},
 	possibleTrainingFields: {type: Array}
 });
 

@@ -4,6 +4,7 @@
       <th>Name</th>
       <th>Trains Team</th>
       <th>Plays in Team</th>
+      <th>Days Available</th>
       <th></th>
     </tr>
   </thead>
@@ -12,6 +13,7 @@
       <td>{{trainer.name}}</td>
       <td>{{getTeamName(trainer.trains)}}</td>
       <td>{{getTeamName(trainer.inTeam)}}</td>
+      <td>{{getDays(trainer.dayOfTheWeek)}}</td>
       <td><button type="button" class="btn btn-secondary" (click)="gotoDetail(trainer)">Edit</button></td>
     </tr>
   </tbody>

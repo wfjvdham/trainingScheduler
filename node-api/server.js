@@ -185,10 +185,19 @@ router.get('/', function(req, res) {
 		    				    if (trainer.length>0) {
 		    				    	//team has a trainer
 		    				    	
-		    				    	//TODO add restrictions for trainer
+		    				    	//trainer restrictions
+		    				    	trainer = trainer[0];
+		    				    	var trainerAvailableDaysArray = trainer.dayOfTheWeek[0].split(",");
+		    				    	console.log(trainerAvailableDaysArray);
+		    				    	free = free.filter(function(o){
+		    				    		console.log(o.dayOfWeek);
+		    				    		console.log(trainerAvailableDaysArray.indexOf(String(o.dayOfWeek)));
+		    				    		return trainerAvailableDaysArray.indexOf(String(o.dayOfWeek))!=-1;
+		    				    	});
+		    				    	console.log(free);
 		    				    	
 	    				    		//get fields where the trainer is training
-	    				    		var fieldsOfTrainer = fieldsParsed.filter(function(o){return o.asignedTo!='-1'&&o.asignedTo == trainer[0].inTeam});
+	    				    		var fieldsOfTrainer = fieldsParsed.filter(function(o){return o.asignedTo!='-1'&&o.asignedTo == trainer.inTeam});
 	    				    		for (var k=0;k<fieldsOfTrainer.length;k++) {
 	    				    			console.log("k= " + k);
 	    				    			var fieldOfTrainer = fieldsOfTrainer[k];
@@ -404,6 +413,7 @@ router.route('/trainers')
 		trainer.name = req.body.name;
 		trainer.trains = req.body.trains;
 		trainer.inTeam = req.body.inTeam;
+		trainer.dayOfTheWeek = req.body.dayOfTheWeek;
 		trainer.possibleTrainingFields = req.body.possibleTrainingFields;
 		trainer.save(function(err) {
 			if (err)
@@ -438,6 +448,7 @@ router.route('/trainers/:trainer_id')
 			trainer.name = req.body.name;
 			trainer.trains = req.body.trains;
 			trainer.inTeam = req.body.inTeam;
+			trainer.dayOfTheWeek = req.body.dayOfTheWeek;
 			trainer.possibleTrainingFields = req.body.possibleTrainingFields;
 			trainer.save(function(err) {
 				if (err)

@@ -20,6 +20,7 @@ var TrainerService = (function () {
     TrainerService.prototype.createBody = function (trainer) {
         return "trains=" + trainer.trains + "&" +
             "name=" + trainer.name + "&" +
+            "dayOfTheWeek=" + trainer.dayOfTheWeek + "&" +
             "inTeam=" + trainer.inTeam;
     };
     TrainerService.prototype.update = function (trainer) {

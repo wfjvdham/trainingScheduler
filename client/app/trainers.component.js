@@ -49,6 +49,29 @@ var TrainersComponent = (function () {
         }
         return name;
     };
+    TrainersComponent.prototype.getDays = function (dayOfTheWeek) {
+        var array = JSON.parse("[" + dayOfTheWeek + "]");
+        var result = "";
+        for (var i = 0; i < array.length; i++) {
+            var day = array[i];
+            if (day == 1) {
+                result = result + "Mon, ";
+            }
+            if (day == 2) {
+                result = result + "Tue, ";
+            }
+            if (day == 3) {
+                result = result + "Wed, ";
+            }
+            if (day == 4) {
+                result = result + "Thu, ";
+            }
+            if (day == 5) {
+                result = result + "Fri, ";
+            }
+        }
+        return result.substring(0, result.length - 2);
+    };
     TrainersComponent = __decorate([
         core_1.Component({
             selector: 'my-trainers',

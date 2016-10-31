@@ -5,6 +5,7 @@ export class Trainer {
     public name: string,
 	  public trains: string,
 	  public inTeam: string, 
+    public dayOfTheWeek: string,
     public __v?: number
   ) {  }
   

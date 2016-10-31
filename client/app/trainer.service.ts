@@ -14,6 +14,7 @@ export class TrainerService {
   createBody(trainer: Trainer): string {
     return "trains="+trainer.trains+"&"+
 	              "name="+trainer.name+"&"+
+                "dayOfTheWeek="+trainer.dayOfTheWeek+"&"+
                 "inTeam="+trainer.inTeam;
   }
 
