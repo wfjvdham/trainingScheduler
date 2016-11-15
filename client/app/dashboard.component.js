@@ -30,7 +30,6 @@ var DashboardComponent = (function () {
         this.locationService = locationService;
         this.teamService = teamService;
         this.trainerService = trainerService;
-        this.status = 'ready';
     }
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -42,7 +41,6 @@ var DashboardComponent = (function () {
         this.teamService.getTeams().then(function (teams) { return _this.teams = teams; });
     };
     DashboardComponent.prototype.log = function () {
-        console.log(this.res);
         console.log(this.solutions);
         console.log(this.locationObjects);
         console.log(this.teams);
@@ -68,24 +66,19 @@ var DashboardComponent = (function () {
     };
     DashboardComponent.prototype.updateSchedule = function () {
         var _this = this;
-        this.status = 'loading';
         var fieldsUrl = 'http://localhost:8080/api/'; // URL to web api
         var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         this.http
             .get(fieldsUrl, { headers: headers })
             .toPromise()
-            .then(function (res) { return _this.res = new Res(res.json().result); })
             .then(function (res) { return _this.reloadTable(); })
             .catch(this.handleError);
     };
     DashboardComponent.prototype.reloadTable = function () {
         var _this = this;
-        if (this.res.result) {
-            this.solutionService.getSolutions()
-                .then(function (solutions) { return _this.solutions = solutions; })
-                .then(function (solutions) { return _this.sortSolutions(); });
-            this.status = 'ready';
-        }
+        this.solutionService.getSolutions()
+            .then(function (solutions) { return _this.solutions = solutions; })
+            .then(function (solutions) { return _this.sortSolutions(); });
     };
     DashboardComponent.prototype.handleError = function (error) {
         console.error('An error occurred', error); // for demo purposes only
@@ -116,7 +109,6 @@ var DashboardComponent = (function () {
         return name;
     };
     DashboardComponent.prototype.getTime = function (minutes) {
-        console.log(minutes);
         var hours = String(minutes / 60);
         if (hours.length == 1) {
             hours = "0" + hours;

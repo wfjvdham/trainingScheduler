@@ -4,8 +4,6 @@
 <button type="button" class="btn btn-primary btn-lg" (click)="gotoTeamDetail()">Add Team</button>
 <button type="button" class="btn btn-primary btn-lg" (click)="gotoTrainerDetail()">Add Trainer</button>
 <button type="button" class="btn btn-primary btn-lg" (click)="updateSchedule()">Update Schedule</button>
-<div *ngIf="status == 'loading'">loading</div>
-<div *ngIf="status == 'ready'">ready</div>
 <button type="button" class="btn btn-primary btn-lg" (click)="log()">Log</button>
 <table class="table table-striped" *ngIf="locationObjects && teams">
   <thead>

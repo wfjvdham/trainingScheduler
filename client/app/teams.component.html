@@ -3,13 +3,15 @@
     <tr>
       <th>Name</th>
       <th>Number of Trainings</th>
+      <th>Days Available</th>
       <th></th>
-    </tr>
+    </tr> 
   </thead>
   <tbody>
     <tr *ngFor="let team of teams">
       <td>{{team.name}}</td>
       <td>{{team.nrOfTrainings}}</td>
+      <td>{{getDays(team.dayOfTheWeek)}}</td>
       <td><button type="button" class="btn btn-secondary" (click)="gotoDetail(team)">Edit</button></td>
     </tr>
   </tbody>

@@ -13,7 +13,8 @@ export class TeamService {
 
   createBody(team: Team): string {
     return "nrOfTrainings="+team.nrOfTrainings+"&"+
-	              "name="+team.name;
+	              "name="+team.name+"&"+
+                "dayOfTheWeek="+team.dayOfTheWeek;
   }
 
   update(team: Team): Promise<Team> {

@@ -22,12 +22,10 @@ class Res {
 })
 export class DashboardComponent implements OnInit {
   
-  res: Res;
   solutions: Solution[];
   locationObjects: LocationObject[];
   teams: Team[];
   trainers: Trainer[];
-  public status: string;
 
   constructor(
     private router: Router,
@@ -35,9 +33,7 @@ export class DashboardComponent implements OnInit {
     private solutionService: SolutionService,
     private locationService: LocationService,
     private teamService: TeamService,
-    private trainerService: TrainerService) {
-      this.status = 'ready';
-  }
+    private trainerService: TrainerService) {}
 
   ngOnInit(): void {
     this.solutionService.getSolutions()
@@ -49,7 +45,6 @@ export class DashboardComponent implements OnInit {
   }
 
   log(): void {
-    console.log(this.res);
     console.log(this.solutions);
     console.log(this.locationObjects);
     console.log(this.teams);
@@ -80,24 +75,19 @@ export class DashboardComponent implements OnInit {
   }
 
   updateSchedule(): void {
-    this.status = 'loading';
     var fieldsUrl = 'http://localhost:8080/api/';  // URL to web api
     var headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
     this.http
       .get(fieldsUrl, {headers: headers})
       .toPromise()
-      .then(res => this.res= new Res(res.json().result))
       .then(res => this.reloadTable())
       .catch(this.handleError);
   }
 
   reloadTable(): void {
-    if(this.res.result) {
-      this.solutionService.getSolutions()
-        .then(solutions => this.solutions = solutions)
-        .then(solutions => this.sortSolutions());
-      this.status = 'ready';
-    }
+    this.solutionService.getSolutions()
+      .then(solutions => this.solutions = solutions)
+      .then(solutions => this.sortSolutions());
   }
 
   private handleError(error: any): Promise<any> {
@@ -133,7 +123,6 @@ export class DashboardComponent implements OnInit {
   }
 
   getTime(minutes: number): string {
-    console.log(minutes);
     var hours = String(minutes/60);
     if(hours.length==1) {
       hours = "0"+hours;

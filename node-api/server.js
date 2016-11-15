@@ -130,6 +130,7 @@ router.get('/', function(req, res) {
 		    			var team = {};
 		    			team.nrOfTrainings = r.teams[i].nrOfTrainings;
 		    			team.name = r.teams[i].name;
+		    			team.dayOfTheWeek = r.teams[i].dayOfTheWeek;
 		    			team.possibleTrainingFields = r.teams[i].possibleTrainingFields;
 		    			team._id = r.teams[i]._id;
 		    			team.n = 0;
@@ -178,6 +179,13 @@ router.get('/', function(req, res) {
 		    					}
 		    					
 		    					//TODO add restrictions for team
+	    				    	var teamAvailableDaysArray = team.dayOfTheWeek[0].split(",");
+	    				    	console.log(teamAvailableDaysArray);
+	    				    	free = free.filter(function(o){
+	    				    		console.log(o.dayOfWeek);
+	    				    		console.log(teamAvailableDaysArray.indexOf(String(o.dayOfWeek)));
+	    				    		return teamAvailableDaysArray.indexOf(String(o.dayOfWeek))!=-1;
+	    				    	});
 		    					
 		    				    //trainer must not be training at the same time
 		    					//TODO add functionality for two trainer on one team
@@ -194,7 +202,6 @@ router.get('/', function(req, res) {
 		    				    		console.log(trainerAvailableDaysArray.indexOf(String(o.dayOfWeek)));
 		    				    		return trainerAvailableDaysArray.indexOf(String(o.dayOfWeek))!=-1;
 		    				    	});
-		    				    	console.log(free);
 		    				    	
 	    				    		//get fields where the trainer is training
 	    				    		var fieldsOfTrainer = fieldsParsed.filter(function(o){return o.asignedTo!='-1'&&o.asignedTo == trainer.inTeam});
@@ -353,6 +360,7 @@ router.route('/teams')
 		var team = new Team();		// create a new instance of the Team model
 		team.nrOfTrainings = req.body.nrOfTrainings;
 		team.name = req.body.name;
+		team.dayOfTheWeek = req.body.dayOfTheWeek;
 		team.possibleTrainingFields = req.body.possibleTrainingFields;
 		team.save(function(err) {
 			if (err)
@@ -386,6 +394,7 @@ router.route('/teams/:team_id')
 				res.send(err);
 			team.nrOfTrainings = req.body.nrOfTrainings;
 			team.name = req.body.name;
+			team.dayOfTheWeek = req.body.dayOfTheWeek;
 			team.possibleTrainingFields = req.body.possibleTrainingFields;
 			team.save(function(err) {
 				if (err)

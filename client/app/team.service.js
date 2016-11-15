@@ -19,7 +19,8 @@ var TeamService = (function () {
     }
     TeamService.prototype.createBody = function (team) {
         return "nrOfTrainings=" + team.nrOfTrainings + "&" +
-            "name=" + team.name;
+            "name=" + team.name + "&" +
+            "dayOfTheWeek=" + team.dayOfTheWeek;
     };
     TeamService.prototype.update = function (team) {
         var url = "" + this.teamsUrl + team._id;
