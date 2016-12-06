@@ -59,7 +59,7 @@ router.use(function(req, res, next) {
 	next();
 });
 
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
+// create schedule
 router.get('/', function(req, res) {
 	async.parallel(
 		    {
@@ -109,7 +109,6 @@ router.get('/', function(req, res) {
 		    	var fieldRequired=0;
 		    	for (var i in r.teams) { fieldRequired += r.teams[i].nrOfTrainings; }
 		    	if (fieldsParsed.length >= fieldRequired) {
-		    		//console.log("enough fields");
 		    		
 		    		//calculate connection scores
 		    		for (var i = 0; i < fieldsParsed.length; i++) {
@@ -156,13 +155,10 @@ router.get('/', function(req, res) {
 		    				console.log(err);
 		    		});
 		    		for (var n=0; n<nMax; n++) {
-		    			//console.log("attempt " + n);
 		    			teamsParsed.sort(function(a, b){return b.n-a.n});
 		    			for (var i=0;i<teamsParsed.length;i++) {
-		    				//console.log("i= " + i);
 		    				var team = teamsParsed[i];
 		    				for (var j=0;j<team.nrOfTrainings;j++) {
-		    					//console.log("j= " + j);
 		    					//hard
 		    					//collect free fields
 		    					var free = fieldsParsed.filter(function(o){return o.asignedTo=='-1'});
@@ -188,7 +184,7 @@ router.get('/', function(req, res) {
 	    				    	});
 		    					
 		    				    //trainer must not be training at the same time
-		    					//TODO add functionality for two trainer on one team
+		    					  //TODO add functionality for two trainer on one team
 		    				    var trainer = r.trainers.filter(function(o){return o.trains == team._id});
 		    				    if (trainer.length>0) {
 		    				    	//team has a trainer
@@ -273,19 +269,6 @@ router.get('/', function(req, res) {
 		    	}
 		    }
 		);	
-	//var exec = require('child_process').exec;
-	//var cmd = 'C://Users//w.vanderham//Documents//R//R-3.3.1//bin//Rscript.exe C://Users//w.vanderham//workspace//trainingSchedule//node-api//RScripts//scheduler.R';
-	//console.log("test cmd");
-	//exec(cmd, function(error, stdout, stderr) {
-		// command output is in stdout
-	//	console.log(stdout);
-	//	if(error==null) {
-	//		res.json({ result: true });	
-	//	} else {
-	//		console.log(error);
-	//		res.json({ result: false });	
-	//	}
-	//});
 });
 
 // on routes that end in /fields
@@ -604,15 +587,6 @@ router.route('/solutions/:solution_id')
 			res.json({ message: 'Solutions Successfully deleted' });
 		});
 	});
-
-//app.post('/', function(req, res) {
-//  console.log(req.body);
-  //res.send(200);
-
-  // sending a response does not pause the function
-//  foo();
-//  res.redirect('/');
-//});
 
 // REGISTER OUR ROUTES -------------------------------
 app.use('/api', router);
